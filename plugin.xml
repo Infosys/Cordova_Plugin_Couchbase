@@ -1,0 +1,51 @@
+<!--Copyright 2018 Infosys Ltd.
+Use of this source code is governed by MIT license that can be found in the LICENSE file or at
+https://opensource.org/licenses/MIT.-->
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-Couchbase" version="0.0.1">
+  <name>cordova-plugin-Couchbase</name>
+  <description>An Cordova plugin to implement data persistence on mobile using Couchbase Lite.</description>
+  <license>NA</license>
+
+  <engines>
+    <engine name="cordova" version=">=3.0.0"/>
+  </engines>
+
+  <js-module src="www/couchbase-api.js" name="Couchbase">
+    <clobbers target="window.plugins.Couchbase" />
+  </js-module>
+
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="couchbasePlugin">
+        <param name="ios-package" value="Couchbase"/>
+      </feature>
+    </config-file>
+    <source-file
+	    src="src/ios/databaseManager.swift"/>
+    <source-file
+        src="src/ios/CouchbasePlugin.swift"/>
+  </platform>
+  
+    <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="Couchbase">
+        <param name="android-package" value="com.couchbase.Couchbase"/>
+      </feature>
+    </config-file>
+
+    <source-file
+            src="src/android/Couchbase.java"
+            target-dir="src/com/coucbase/" />
+
+    <source-file
+        src="src/android/DatabaseManager.java"
+        target-dir="src/com/couchbase/" />
+
+    <source-file
+            src="src/android/Utils.java"
+            target-dir="src/com/couchbase/" />
+  </platform>
+</plugin>
